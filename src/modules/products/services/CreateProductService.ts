@@ -35,3 +35,5 @@ class CreateProductService {
     }
 
 }
+
+export default CreateProductService
