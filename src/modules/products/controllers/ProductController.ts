@@ -6,6 +6,7 @@ import CreateProductService from "../services/CreateProductService";
 import DeleteProductService from "../services/DeleteProductService";
 import ListProductService from "../services/ListProductService";
 import ShowProductService from "../services/ShowProductService";
+import UpdateProductService from "../services/UpdateProductService";
 
 class ProductController {
 
@@ -51,9 +52,22 @@ class ProductController {
         let showProductService = new ShowProductService()
 
         let product = await showProductService.execute({id})
-        
+
         return response.json(product)
     }
+
+    // vamos criar o método para atualizar um produto no banco de dados
+    public async update(request: Request, response: Response): Promise<Response>{
+
+        // recuperar id
+        let {id} = request.params
+        let {name, quantity, price} = request.body
+
+        let updateProductService = new UpdateProductService()
+        let product = await updateProductService.execute({id, name, quantity, price})
+        return response.json(product)
+    }
+
 }
 
   
