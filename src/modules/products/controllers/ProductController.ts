@@ -1,8 +1,9 @@
 
 // vejamos que o controller não conterá regra de negócios
 
-import { Request, response, Response } from "express";
+import { request, Request, response, Response } from "express";
 import CreateProductService from "../services/CreateProductService";
+import DeleteProductService from "../services/DeleteProductService";
 
 class ProductController {
 
@@ -21,6 +22,21 @@ class ProductController {
         // retorno o produto inserido
         return response.json(product);
     }
+
+    // vamos criar o método para remover um produto no banco de dados
+    public async delete(request: Request, response: Response): Promise <Response> {
+        // o id do produto para remoção virá na URL
+        let {id} = request.params
+        // cria o objeto de service
+        let deleteProductService = new DeleteProductService()
+        
+        await deleteProductService.execute({id})
+
+        return response.json([]);
+    }  
+
 }
+
+  
 
 export default ProductController;

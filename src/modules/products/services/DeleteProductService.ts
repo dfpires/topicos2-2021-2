@@ -26,3 +26,5 @@ class DeleteProductService {
         await productRepository.remove(productExist)
     }
 }
+
+export default DeleteProductService
