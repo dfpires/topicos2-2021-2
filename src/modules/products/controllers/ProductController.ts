@@ -47,8 +47,11 @@ class ProductController {
     // vamos criar o método para mostrar um produto do banco de dados
     public async show(request: Request, response: Response): Promise<Response>{
         let {id} = request.params
+
         let showProductService = new ShowProductService()
+
         let product = await showProductService.execute({id})
+        
         return response.json(product)
     }
 }
