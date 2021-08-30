@@ -5,6 +5,7 @@ import { request, Request, response, Response } from "express";
 import CreateProductService from "../services/CreateProductService";
 import DeleteProductService from "../services/DeleteProductService";
 import ListProductService from "../services/ListProductService";
+import ShowProductService from "../services/ShowProductService";
 
 class ProductController {
 
@@ -37,10 +38,18 @@ class ProductController {
     }  
 
     // vamos criar o método para listar todos os produtos no banco de dados
-    public async index(): Promise<Response> {
+    public async index(request: Request, response: Response): Promise<Response> {
         let listProductService = new ListProductService()
         let products = await listProductService.execute()
         return response.json(products)
+    }
+
+    // vamos criar o método para mostrar um produto do banco de dados
+    public async show(request: Request, response: Response): Promise<Response>{
+        let {id} = request.params
+        let showProductService = new ShowProductService()
+        let product = await showProductService.execute({id})
+        return response.json(product)
     }
 }
 
