@@ -5,7 +5,8 @@ class AppError {
     public readonly statusCode: number;
 
     // criar o método construtor
-    constructor(message: string, statusCode: number) {
+    // se não for passado valor para statusCode, o valor padrão será 400
+    constructor(message: string, statusCode = 400) {
         this.message  = message;
         this.statusCode = statusCode;
     }

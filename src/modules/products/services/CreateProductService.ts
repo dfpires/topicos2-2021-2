@@ -1,6 +1,7 @@
 // vamos tratar as validações e regras de negócio aqui e não no controller
 
 import { getCustomRepository } from "typeorm";
+import AppError from "../../../shared/errors/AppError";
 import Product from "../typeorm/entities/Product";
 import ProductRepository from "../typeorm/repositories/ProductRepository";
 
@@ -23,6 +24,8 @@ class CreateProductService {
         let productExists = await productRepository.findByName(name);
         if (productExists) {
             console.log(`Produto já existe`)
+            // o statusCode será 400 pois não foi passado outro código
+            throw new AppError(`Já existe um produto com este nome`);
         }
         // cria o produto para inserção
         let newProduct = productRepository.create({
