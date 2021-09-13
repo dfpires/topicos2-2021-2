@@ -1,6 +1,7 @@
-import { Repository } from "typeorm";
+import { EntityRepository, Repository } from "typeorm";
 import Product from "../entities/Product";
 
+@EntityRepository(Product)
 class ProductRepository extends Repository<Product> {
     
     // esta classe vai herdar todos os métodos de inserir, remover, consultar e atualizar do TypeORM

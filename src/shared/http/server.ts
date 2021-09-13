@@ -1,15 +1,19 @@
 import 'reflect-metadata'
 // vamos criar um servidor web com dependência do express
 import express, { NextFunction, Request, Response } from 'express'
+// importa a parte de erro do express
+import 'express-async-errors'
 // permite dar permissão para as APIs
 import cors from 'cors'
+// chama o index.ts da pasta typeorm
+import '../typeorm'
+
 //criando o servidor
 let servidor = express()
 // servidor usando o cors
 servidor.use(cors())
 // servidor precisa converter em JSON o conteúdo vindo do frontend
 servidor.use(express.json())
-
 
 // importa as rotas
 import routes from './routes'
