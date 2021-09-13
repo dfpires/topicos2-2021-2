@@ -20,7 +20,8 @@ export class CreateUsers1631545253632 implements MigrationInterface {
                 },
                 {
                     name: 'email',
-                    type: 'varchar'
+                    type: 'varchar',
+                    isUnique: true
                 },
                 {
                     name: 'password',
@@ -28,7 +29,8 @@ export class CreateUsers1631545253632 implements MigrationInterface {
                 },
                 {
                     name: 'avatar',
-                    type: 'varchar'
+                    type: 'varchar',
+                    isNullable: true
                 },
                 {
                     name: 'created_at',
