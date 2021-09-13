@@ -13,10 +13,14 @@ servidor.use(express.json())
 
 // importa as rotas
 import routes from './routes'
-import { RequestListener } from 'http'
+
+import {errors} from 'celebrate'
+
 import AppError from '../errors/AppError'
 // utilizando 
 servidor.use(routes)
+
+servidor.use(errors()) // quem lida com os erros é o celebrate
 
 servidor.use(
     (error: Error, request: Request, response: Response, next: NextFunction ) => {
