@@ -5,7 +5,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import 'express-async-errors'
 // permite dar permissão para as APIs
 import cors from 'cors'
-// chama o index.ts da pasta typeorm
+// chama o index.ts da pasta typeorm -> conecta no banco de dados com TypeORM
 import '../typeorm'
 
 //criando o servidor
