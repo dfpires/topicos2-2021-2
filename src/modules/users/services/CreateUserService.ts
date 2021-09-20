@@ -5,6 +5,9 @@ import AppError from "../../../shared/errors/AppError";
 import User from "../typeorm/entities/User";
 import UserRepository from "../typeorm/repositories/UserRepository";
 
+// importa a dependência bcryptjs
+import {hash} from 'bcryptjs'
+
 // vamos criar uma interface que é um tipo de produto
 interface IRequest {
     name: string,
@@ -27,9 +30,16 @@ class CreateUserService {
             // o statusCode será 400 pois não foi passado outro código
             throw new AppError(`Já existe um usuário com este e-mail`);
         }
+
+        // vamos criptografar a senha do usuário
+        // dependência bcryptjs
+        let senhaCriptografada = await hash(password, 8)
+
         // cria o produto para inserção
         let newUser = userRepository.create({
-            name, email, password
+            name, 
+            email, 
+            password: senhaCriptografada
         })
         // efetivamente insere
         await userRepository.save(newUser);
