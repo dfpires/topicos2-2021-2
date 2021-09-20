@@ -2,41 +2,41 @@
 
 import { getCustomRepository } from "typeorm";
 import AppError from "../../../shared/errors/AppError";
-import Product from "../typeorm/entities/Product";
-import ProductRepository from "../typeorm/repositories/ProductRepository";
+import User from "../typeorm/entities/User";
+import UserRepository from "../typeorm/repositories/UserRepository";
 
 // vamos criar uma interface que é um tipo de produto
 interface IRequest {
     name: string,
-    price: number
-    quantity: number
+    email: string,
+    password:string
 }
 
 // vamos criar a classe
-class CreateProductService {
+class CreateUserService {
 
     //vamos criar um método chamado execute para executar a inserção
     // recebe os dados do produto e retorna o produto inserido
-    public async execute({name, price, quantity}: IRequest): Promise<Product> {
+    public async execute({name, email, password}: IRequest): Promise<User> {
         // obter o repositório do produto
-        let productRepository = getCustomRepository(ProductRepository)
+        let userRepository = getCustomRepository(UserRepository)
         // vamos verificar se o produto já existe
-        let productExists = await productRepository.findByName(name);
-        if (productExists) {
-            console.log(`Produto já existe`)
+        let userExists = await userRepository.findByEmail(email);
+        if (userExists) {
+            console.log(`Usuário já existe`)
             // o statusCode será 400 pois não foi passado outro código
-            throw new AppError(`Já existe um produto com este nome`);
+            throw new AppError(`Já existe um usuário com este e-mail`);
         }
         // cria o produto para inserção
-        let newProduct = productRepository.create({
-            name, price, quantity
+        let newUser = userRepository.create({
+            name, email, password
         })
         // efetivamente insere
-        await productRepository.save(newProduct);
+        await userRepository.save(newUser);
         // retorno o novo produto
-        return newProduct;
+        return newUser;
     }
 
 }
 
-export default CreateProductService
+export default CreateUserService
