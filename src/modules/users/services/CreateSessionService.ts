@@ -3,6 +3,7 @@ import AppError from "../../../shared/errors/AppError";
 import User from "../typeorm/entities/User";
 import UserRepository from "../typeorm/repositories/UserRepository";
 import {compare} from 'bcryptjs'
+import {sign} from 'jsonwebtoken'
 
 // interface de entrada de dados
 interface IRequest{
@@ -32,8 +33,17 @@ class CreateSessionService {
             throw new AppError(' Email/Senha inválida', 401)
         }
 
-        // está tudo correto, então vamos entregar o toke
+        // está tudo correto, então vamos entregar o token
+        // o token será criado a partir de um segredo
 
-        
+        const token = sign({}, 'gdgdfgdf43534534', {
+            subject: user.id,
+            expiresIn: '1d'
+        })
+
+        return {
+            user, 
+            token
+        }
     }
 }
