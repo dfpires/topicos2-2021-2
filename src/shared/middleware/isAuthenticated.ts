@@ -20,6 +20,8 @@ export default function isAutheticated(request: Request, response: Response, nex
     try {
         const tokenDecodificado = verify(token, 'gdgdfgdf43534534')
 
+        return next() // o usuário pode ir para o próximo evento, que é consumir a API
+
     }
     catch{
         throw new AppError('Token é inválido')
