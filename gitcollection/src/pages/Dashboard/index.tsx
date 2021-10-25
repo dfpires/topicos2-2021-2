@@ -12,7 +12,7 @@ export const Dashboard: React.FC = () => {
     }
     // função é chamada quando o botão for pressionado
     function handleAddRepository(event: React.FormEvent<HTMLFormElement>){
-        alert({novoRepositorio})
+        alert(novoRepositorio)
     }
     return (
         <>
