@@ -6,15 +6,19 @@ export const Dashboard: React.FC = () => {
     const [novoRepositorio, setNovoRepositorio] = React.useState('')
 
     // função para atribuir valor ao novoRepositorio
+    // função é chamada quando usuário digitar na caixa de texto
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
         setNovoRepositorio(event.target.value) // valor do componente que sofreu o evento
     }
-    
+    // função é chamada quando o botão for pressionado
+    function handleAddRepository(event: React.FormEvent<HTMLFormElement>){
+        alert({novoRepositorio})
+    }
     return (
         <>
             <img src={logo} alt="GitCollection"/>
             <Title> Catálogo de repositórios do Github </Title>
-            <Form>
+            <Form onSubmit={handleAddRepository}>
                 <input onChange={handleInputChange} placeholder="username/repository_name"/>
                 <button type="submit"> Buscar </button>
             </Form>
